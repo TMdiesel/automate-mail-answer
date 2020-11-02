@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "automation"
+version = "0.1.0"
+description = ""
+authors = ["TakuyaMurata <cerezzodora2262@ilcoud.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+selenium = "^3.141.0"
+jupyter = "^1.0.0"
+ipython = "^7.19.0"
+jupyterlab = "^2.2.9"
+google-api-python-client = "^1.12.5"
+google-auth-oauthlib = "^0.4.2"
+beautifulsoup4 = "^4.9.3"
+oauth2client = "^4.1.3"
+schedule = "^0.6.0"
+jpholiday = "^0.1.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
