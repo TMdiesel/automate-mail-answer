@@ -2,7 +2,7 @@
 name = "automation"
 version = "0.1.0"
 description = ""
-authors = ["TakuyaMurata <cerezzodora2262@ilcoud.com>"]
+authors = [""]
 
 [tool.poetry.dependencies]
 python = "^3.7"
