@@ -17,9 +17,6 @@ jobs:
       - uses: nanasess/setup-chromedriver@master
 
       - run: echo 'CHROMEAPP=google-chrome' >> $GITHUB_ENV
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
       - run: |
           CHROME_VERSION=$("$CHROMEAPP" --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
           echo "CHROMEDRIVER_VERSION=$(curl --location --fail --retry 10 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})" >> $GITHUB_ENV
