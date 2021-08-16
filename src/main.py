@@ -8,7 +8,7 @@ from selenium.webdriver.common.alert import Alert
 import jpholiday
 
 # my package
-import mail_utils as mu
+import src.mail_utils as mu
 
 logger = logging.getLogger("Log")
 
@@ -61,7 +61,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
             ).click()
         if save_ss:
             now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-            driver.save_screenshot("./png/answer_%s.png" % (now))
+            driver.save_screenshot("./img/answer_%s.png" % (now))
             logger.info("save screenshot of your answer")
 
         # register
@@ -69,7 +69,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
         Alert(driver).accept()
         if save_ss:
             now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-            driver.save_screenshot("./png/register_%s.png" % (now))
+            driver.save_screenshot("./img/register_%s.png" % (now))
             logger.info("save screenshot of your register")
         logger.info("register your answer")
     except Exception as e:
@@ -80,9 +80,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
 
 def main() -> None:
     formatter = "%(levelname)s : %(name)s : %(asctime)s : %(message)s"
-    logging.basicConfig(
-        filename="./log/logger.log", level=logging.INFO, format=formatter
-    )
+    logging.basicConfig(filename="./logger.log", level=logging.INFO, format=formatter)
 
     msg = mu.get_msg()
     URL = mu.content_to_URL(msg)

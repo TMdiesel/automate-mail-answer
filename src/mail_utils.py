@@ -6,8 +6,6 @@ import os
 import logging
 import datetime
 
-# my package
-import envvar
 
 logger = logging.getLogger("Log").getChild("sub")
 
@@ -19,7 +17,6 @@ def get_msg() -> "msg":
     Returns:
         msg
     """
-    envvar.env_set()
     UserName = os.environ.get("UserName", "")
     PassName = os.environ.get("PassName", "")
     CompanyEmail = os.environ.get("CompanyEmail", "")
