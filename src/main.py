@@ -6,6 +6,8 @@ import logging
 from selenium import webdriver
 from selenium.webdriver.common.alert import Alert
 import jpholiday
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 
 # my package
 import mail_utils as mu
@@ -64,8 +66,11 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
             driver.save_screenshot("./img/answer_%s.png" % (now))
             logger.info("save screenshot of your answer")
 
+        logger.info("successfully put your answer")
         # register
         driver.find_element_by_xpath("//input[@name='btnReg2']").click()
+        wait = WebDriverWait(driver, 10)
+        wait.until(expected_conditions.alert_is_present())
         Alert(driver).accept()
         if save_ss:
             now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
