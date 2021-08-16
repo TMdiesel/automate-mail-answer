@@ -131,7 +131,7 @@ dmypy.json
 .pyre/
 
 # driver
-chromedriver.exe
+chromedriver*
 
 #png
 *.png

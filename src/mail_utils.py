@@ -24,9 +24,11 @@ def get_msg() -> "msg":
     gmail = imaplib.IMAP4_SSL("imap.gmail.com", "993")
     gmail.login(UserName, PassName)
     gmail.select()
+
     yesterday = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime(
         "%d-%b-%Y"
     )
+
     search_option = '(FROM "%s" SENTSINCE "%s")' % (CompanyEmail, yesterday)
 
     try:
@@ -36,8 +38,8 @@ def get_msg() -> "msg":
         logger.error(e)
 
     for num in data[0].decode().split():
-        typ, data = gmail.fetch(num, "(RFC822)")
-        msg = email.message_from_string(data[0][1].decode())
+        typ, data_ = gmail.fetch(num, "(RFC822)")
+        msg = email.message_from_string(data_[0][1].decode())
 
     gmail.close()
     gmail.logout()

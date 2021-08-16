@@ -80,11 +80,13 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
 
 def main() -> None:
     formatter = "%(levelname)s : %(name)s : %(asctime)s : %(message)s"
-    logging.basicConfig(filename="./logger.log", level=logging.INFO, format=formatter)
+    logging.basicConfig(
+        filename="./log/logger.log", level=logging.INFO, format=formatter
+    )
 
     msg = mu.get_msg()
     URL = mu.content_to_URL(msg)
-    automate_chrome(URL)
+    automate_chrome(URL, save_ss=False)
 
 
 if __name__ == "__main__":
