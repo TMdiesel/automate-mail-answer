@@ -43,21 +43,21 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
     try:
         # answer
         # Q1:いいえ
-        driver.find_element_by_xpath("//select[@name='inputcmb_1']/option[2]").click()
+        driver.find_element_by_xpath("//select[@name='inputcmb_1']/option[1]").click()
         # Q2:いいえ
-        driver.find_element_by_xpath("//select[@name='inputcmb_2']/option[2]").click()
-        # Q4:オフィス在籍
-        driver.find_element_by_xpath("//select[@name='inputcmb_4']/option[8]").click()
+        driver.find_element_by_xpath("//select[@name='inputcmb_2']/option[1]").click()
+        # Q4:その他
+        driver.find_element_by_xpath("//select[@name='inputcmb_4']/option[6]").click()
         # Q5:自宅(テレワーク・休み等)
-        driver.find_element_by_xpath("//select[@name='inputcmb_5']/option[8]").click()
+        driver.find_element_by_xpath("//select[@name='inputcmb_5']/option[7]").click()
         # Q3:休み or テレワーク
         if _isBizDay():
             driver.find_element_by_xpath(
-                "//select[@name='inputcmb_3']/option[4]"
+                "//select[@name='inputcmb_3']/option[3]"
             ).click()
         else:
             driver.find_element_by_xpath(
-                "//select[@name='inputcmb_3']/option[3]"
+                "//select[@name='inputcmb_3']/option[2]"
             ).click()
         if save_ss:
             now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
