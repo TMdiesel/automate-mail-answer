@@ -37,7 +37,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
 
-    driver = webdriver.Chrome("./driver/chromedriver.exe", options=options)
+    driver = webdriver.Chrome(options=options)
     driver.get(URL)
 
     try:

@@ -8,19 +8,31 @@ on:
 
 jobs:
   register:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8
       - uses: nanasess/setup-chromedriver@master
-      
+
+      - run: echo 'CHROMEAPP=google-chrome' >> $GITHUB_ENV
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: |
+          CHROME_VERSION=$("$CHROMEAPP" --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
+          echo "CHROMEDRIVER_VERSION=$(curl --location --fail --retry 10 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})" >> $GITHUB_ENV
+      - uses: ./
+        with:
+          chromedriver-version: ${{ env.CHROMEDRIVER_VERSION }}
       - name: Install driver
         run: |
+          sudo pip3 install selenium
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # disable headless mode
+          python3 $GITHUB_WORKSPACE/__tests__/chromedriver.py
 
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
@@ -35,4 +47,4 @@ jobs:
         env:
           COMPANYEMAIL: ${{ secrets.COMPANYEMAIL }}
           USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{secrets.PASSWORD}}
+          PASSWORD: ${{ secrets.PASSWORD }}
