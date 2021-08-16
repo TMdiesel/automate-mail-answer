@@ -17,19 +17,19 @@ def get_msg() -> "msg":
     Returns:
         msg
     """
-    UserName = os.environ.get("UserName", "")
-    PassName = os.environ.get("PassName", "")
-    CompanyEmail = os.environ.get("CompanyEmail", "")
+    USERNAME = os.environ.get("USERNAME", "")
+    PASSWORD = os.environ.get("PASSWORD", "")
+    COMPANYEMAIL = os.environ.get("COMPANYEMAIL", "")
 
     gmail = imaplib.IMAP4_SSL("imap.gmail.com", "993")
-    gmail.login(UserName, PassName)
+    gmail.login(USERNAME, PASSWORD)
     gmail.select()
 
     yesterday = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime(
         "%d-%b-%Y"
     )
 
-    search_option = '(FROM "%s" SENTSINCE "%s")' % (CompanyEmail, yesterday)
+    search_option = '(FROM "%s" SENTSINCE "%s")' % (COMPANYEMAIL, yesterday)
 
     try:
         typ, data = gmail.search(None, search_option)

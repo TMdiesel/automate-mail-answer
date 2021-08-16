@@ -8,7 +8,7 @@ from selenium.webdriver.common.alert import Alert
 import jpholiday
 
 # my package
-import src.mail_utils as mu
+import mail_utils as mu
 
 logger = logging.getLogger("Log")
 
@@ -80,9 +80,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
 
 def main() -> None:
     formatter = "%(levelname)s : %(name)s : %(asctime)s : %(message)s"
-    logging.basicConfig(
-        filename="./log/logger.log", level=logging.INFO, format=formatter
-    )
+    logging.basicConfig(level=logging.INFO, format=formatter)
 
     msg = mu.get_msg()
     URL = mu.content_to_URL(msg)
