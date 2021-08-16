@@ -3,7 +3,7 @@ name: register
 on:
   schedule:
     # github actions のデフォルトの time zone が UTC なので、日本時間 - 9時間 した値を書く
-    - cron: "50 0 * * 1,2,3,4,5"
+    - cron: "30 21 * * *"
   workflow_dispatch:
 
 jobs:
@@ -14,13 +14,13 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - uses: nanasess/setup-chromedriver@master
 
       - run: echo 'CHROMEAPP=google-chrome' >> $GITHUB_ENV
       - run: |
           CHROME_VERSION=$("$CHROMEAPP" --version | cut -f 3 -d ' ' | cut -d '.' -f 1)
           echo "CHROMEDRIVER_VERSION=$(curl --location --fail --retry 10 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})" >> $GITHUB_ENV
-      - uses: ./
+
+      - uses: nanasess/setup-chromedriver@master
         with:
           chromedriver-version: ${{ env.CHROMEDRIVER_VERSION }}
       - name: Install driver
