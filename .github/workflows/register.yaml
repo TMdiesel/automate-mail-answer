@@ -15,9 +15,7 @@ jobs:
         with:
           python-version: 3.8
       - uses: nanasess/setup-chromedriver@master
-        with:
-          # Optional: do not specify to match Chrome's version
-          chromedriver-version: "92.0.4515.131"
+      
       - name: Install driver
         run: |
           export DISPLAY=:99
