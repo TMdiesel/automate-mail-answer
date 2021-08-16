@@ -71,7 +71,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
             now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
             driver.save_screenshot("./img/register_%s.png" % (now))
             logger.info("save screenshot of your register")
-        logger.info("register your answer")
+        logger.info("successfully register your answer")
     except Exception as e:
         logger.error(e)
 

@@ -82,7 +82,7 @@ def content_to_URL(msg) -> str:
     content = _get_content(msg)
     content_list = re.split("[\r|\n]", content)
     URL = [content for content in content_list if content.startswith("http")][0]
-    logger.info(URL)
+    logger.info("successfully get URL")
 
     return URL
 

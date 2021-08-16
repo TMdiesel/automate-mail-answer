@@ -6,18 +6,23 @@ on:
     - cron: "50 0 * * 1,2,3,4,5"
   workflow_dispatch:
 
-  push:
-    branches:
-      - test-send-to-slack
-
 jobs:
-  ci:
+  register:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8
+      - uses: nanasess/setup-chromedriver@master
+        with:
+          # Optional: do not specify to match Chrome's version
+          chromedriver-version: "88.0.4324.96"
+      - name: Install driver
+        run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
@@ -27,7 +32,7 @@ jobs:
       - name: install dependencies
         run: poetry install
 
-      - name: Run owl
+      - name: Run main
         run: poetry run python src/main.py
         env:
           COMPANYEMAIL: ${{ secrets.COMPANYEMAIL }}
