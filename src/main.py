@@ -82,6 +82,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
         driver.save_screenshot("./img/register_%s.png" % (now))
         logger.info("save screenshot of your register")
     logger.info("successfully register your answer")
+    logger.info(driver.page_source)
 
     driver.quit()
 
