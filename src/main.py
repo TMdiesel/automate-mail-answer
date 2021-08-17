@@ -63,7 +63,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
     # Q4:オフィス在籍
     Select(
         driver.find_element_by_xpath("//select[@name='inputcmb_4']")
-    ).select_by_index(7)
+    ).select_by_index(1)
     # Q5:自宅
     Select(
         driver.find_element_by_xpath("//select[@name='inputcmb_5']")
