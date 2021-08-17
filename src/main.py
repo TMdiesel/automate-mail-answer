@@ -1,6 +1,7 @@
 # default package
 import datetime
 import logging
+import time
 
 # third package
 from selenium import webdriver
@@ -81,6 +82,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
         driver.save_screenshot("./img/register_%s.png" % (now))
         logger.info("save screenshot of your register")
     logger.info("successfully register your answer")
+    time.sleep(5)
 
     driver.quit()
 
