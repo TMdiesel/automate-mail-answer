@@ -59,21 +59,20 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
         Select(
             driver.find_element_by_xpath("//select[@name='inputcmb_3']")
         ).select_by_index(2)
-    # Q4:その他
+    # Q4:オフィス在籍
     Select(
         driver.find_element_by_xpath("//select[@name='inputcmb_4']")
     ).select_by_index(7)
-    # Q5:自宅(テレワーク・休み等)
+    # Q5:自宅
     Select(
         driver.find_element_by_xpath("//select[@name='inputcmb_5']")
     ).select_by_index(7)
-
+    logger.info("successfully put your answer")
     if save_ss:
         now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         driver.save_screenshot("./img/answer_%s.png" % (now))
         logger.info("save screenshot of your answer")
 
-    logger.info("successfully put your answer")
     # register
     driver.find_element_by_xpath("//input[@name='btnReg2']").click()
     Alert(driver).accept()
