@@ -40,6 +40,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
 
     driver = webdriver.Chrome(options=options)
     driver.get(URL)
+    logger.info(URL)
 
     # answer
     # Q1:いいえ
