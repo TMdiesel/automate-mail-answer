@@ -6,8 +6,7 @@ import logging
 from selenium import webdriver
 from selenium.webdriver.common.alert import Alert
 import jpholiday
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.select import Select
 
 # my package
 import mail_utils as mu
@@ -44,18 +43,31 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
 
     # answer
     # Q1:いいえ
-    driver.find_element_by_xpath("//select[@name='inputcmb_1']/option[1]").click()
+    Select(
+        driver.find_element_by_xpath("//select[@name='inputcmb_1']")
+    ).select_by_index(1)
     # Q2:いいえ
-    driver.find_element_by_xpath("//select[@name='inputcmb_2']/option[1]").click()
-    # Q4:その他
-    driver.find_element_by_xpath("//select[@name='inputcmb_4']/option[6]").click()
-    # Q5:自宅(テレワーク・休み等)
-    driver.find_element_by_xpath("//select[@name='inputcmb_5']/option[7]").click()
+    Select(
+        driver.find_element_by_xpath("//select[@name='inputcmb_2']")
+    ).select_by_index(1)
     # Q3:休み or テレワーク
     if _isBizDay():
-        driver.find_element_by_xpath("//select[@name='inputcmb_3']/option[3]").click()
+        Select(
+            driver.find_element_by_xpath("//select[@name='inputcmb_3']")
+        ).select_by_index(3)
     else:
-        driver.find_element_by_xpath("//select[@name='inputcmb_3']/option[2]").click()
+        Select(
+            driver.find_element_by_xpath("//select[@name='inputcmb_3']")
+        ).select_by_index(2)
+    # Q4:その他
+    Select(
+        driver.find_element_by_xpath("//select[@name='inputcmb_4']")
+    ).select_by_index(7)
+    # Q5:自宅(テレワーク・休み等)
+    Select(
+        driver.find_element_by_xpath("//select[@name='inputcmb_5']")
+    ).select_by_index(7)
+
     if save_ss:
         now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         driver.save_screenshot("./img/answer_%s.png" % (now))
