@@ -15,15 +15,15 @@ import mail_utils as mu
 logger = logging.getLogger("Log")
 
 
-def _isBizDay() -> bool:
+def _isholiday() -> bool:
     """
     今日が休日かどうか判定する
     Return:
         休日:True
         営業日:False
     """
-    Date = datetime.datetime.now()
-    if Date.weekday() >= 5 or jpholiday.is_holiday(Date):
+    now = datetime.datetime.now() + datetime.timedelta(hours=9)
+    if now.weekday() >= 5 or jpholiday.is_holiday(now):
         return True
     else:
         return False
@@ -52,7 +52,7 @@ def automate_chrome(URL: str, save_ss: bool = True) -> None:
         driver.find_element_by_xpath("//select[@name='inputcmb_2']")
     ).select_by_index(1)
     # Q3:休み or テレワーク
-    if _isBizDay():
+    if _isholiday():
         Select(
             driver.find_element_by_xpath("//select[@name='inputcmb_3']")
         ).select_by_index(3)
